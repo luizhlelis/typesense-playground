@@ -1,0 +1,36 @@
+version: "3.5"
+services:
+  typesense:
+    image: typesense/typesense:0.22.0.rcs11
+    container_name: typesense
+    environment:
+      - TYPESENSE_API_KEY=Hu52dwsas2AdxdE
+      - TYPESENSE_DATA_DIR=/typesense-data
+    volumes:
+      - "./typesense-data:/typesense-data/"
+    ports:
+      - "8108:8108"
+
+  seed-data:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seed-data
+    depends_on:
+      - typesense
+    environment:
+      - TYPESENSE_API_KEY=Hu52dwsas2AdxdE
+      - SERVER_HOSTNAME=typesense
+    volumes:
+      - "./scripts:/app/"
+      - "./seed-data:/seed-data/"
+    command:
+      [
+        "/app/wait-for-it.sh",
+        "typesense:8108",
+        "-s",
+        "-t",
+        "40",
+        "--",
+        "/app/batch-import-docs.sh"
+      ]
