@@ -1,12 +1,12 @@
 # Typesense search engine: an easier-to-use alternative to ElasticSearch
 
-In a daily development process, it's common the need of search for a specific term in a large amount of data. The search engine tools came to solve this kind of problem and one of the most famous is called [ElasticSearch](https://github.com/elastic/elasticsearch). If you had already worked with ElasticSearch you probably know that it's a such powerful tool, but it's also complex and has a steep learning curve. For example, doing an in-house deployment of ElasticSearch you will face a high production ops overhead dealing with over 3000 configuration parameters.
+In a daily development process, it's common the need to search a specific term in a large amount of data. The search engine tools came to solve this kind of problem and one of the most famous is called [ElasticSearch](https://github.com/elastic/elasticsearch). If you have already worked with ElasticSearch you probably know that it's such a powerful tool, but it's also complex and has a steep learning curve. For example, doing an in-house deployment of ElasticSearch you will face a high production ops overhead dealing with over 3000 configuration parameters.
 
 Built in C++, [Typesense](https://github.com/typesense/typesense) is an easier-to-use alternative to ElasticSearch. The community describes it as an open-source, fast, typo tolerant, and easy-to-use search engine. The current article is a quick introduction to `Typesense` using a search engine example for the `Nobel Prize Winners`.
 
 ## Server configuration
 
-Just like most search engine tools, `Typesense` is a NoSql document-oriented database. For the current example, I'll self-host `Typesense` on my local machine using the official [docker image](https://hub.docker.com/r/typesense/typesense/), you can see the example source code [here](https://github.com/luizhlelis/typesense-playground). There are [few parameters](https://typesense.org/docs/0.21.0/api/server-configuration.html#using-command-line-arguments) to configure the `Typesense` server, but you could let the default values and just configure the `--api-key` (admin API key that allows all operations) and the `--data-dir` (path to the directory where data will be stored on disk) parameters. Take a look at the `typesense` service on `docker-compose`:
+Just like most search engine tools, `Typesense` is a NoSql document-oriented database. For the current example, I'll self-host `Typesense` on my local machine using the official [docker image](https://hub.docker.com/r/typesense/typesense/), as you can see in the example [source code](https://github.com/luizhlelis/typesense-playground). There are [few parameters](https://typesense.org/docs/0.21.0/api/server-configuration.html#using-command-line-arguments) to configure the `Typesense` server, but you could let the default values and just configure the `--api-key` (admin API key that allows all operations) and the `--data-dir` (path to the directory where data will be stored on disk) parameters. Take a look at the `typesense` service on `docker-compose`:
 
 ```yml
   typesense:
@@ -23,7 +23,7 @@ Just like most search engine tools, `Typesense` is a NoSql document-oriented dat
 
 > **NOTE**: when using `environment variables`, you need to add the `TYPESENSE_` prefix to the variable name
 
-One important thing to note is: I choose to create a volume for the `typesense-data` folder, so the data stored in container will be persisted locally. Along with the `typesense` service, I registered a `seed-data` service on `docker-compose.yml` to seed the `Nobel Prize Winners` data in the `Typesense` server:
+One important thing to note is: I choose to create a volume for the `typesense-data` folder, so the data stored in the container will be persisted locally. Along with the `typesense` service, I registered a `seed-data` service on `docker-compose.yml` to seed the `Nobel Prize Winners` data in the `Typesense` server:
 
 ```yml
   seed-data:
@@ -51,7 +51,7 @@ One important thing to note is: I choose to create a volume for the `typesense-d
       ]
 ```
 
-The volumes listed above are: a path to the scripts ([wait-for-it.sh](https://github.com/luizhlelis/typesense-playground/blob/main/src/scripts/wait-for-it.sh) that waits for `typesense` to response on it's `port` and [batch-import-docs.sh](https://github.com/luizhlelis/typesense-playground/blob/main/src/scripts/batch-import-docs.sh) which seed the data) and also a path to the dataset formatted as [JSONLines](https://jsonlines.org/).
+The volumes listed above are: a path to the scripts ([wait-for-it.sh](https://github.com/luizhlelis/typesense-playground/blob/main/src/scripts/wait-for-it.sh) that waits for `typesense` to respond on it's `port` and [batch-import-docs.sh](https://github.com/luizhlelis/typesense-playground/blob/main/src/scripts/batch-import-docs.sh) which seed the data) and also a path to the dataset formatted as [JSONLines](https://jsonlines.org/).
 
 ## Create collection and import documents
 
@@ -176,6 +176,6 @@ Did you notice the typo in the query text? Instead of `Curie`, `Curii` was sent 
 
 ## Conclusion
 
-`Typesense` has been turning a nice alternative to search engines like Algolia and ElasticSearch. Its simple server setup and intuitive API turns the navigation much easier. For the current example, I used CURL to interact with `Typesense` Server directly, but there are many [clients and integrations](https://github.com/typesense/typesense#api-clients) developed in your favorite language.
+`Typesense` has been turning into a nice alternative to search engines like Algolia and ElasticSearch. Its simple server setup and intuitive API turns the navigation much easier. For the current example, I used CURL to interact with `Typesense` Server directly, but there are many [clients and integrations](https://github.com/typesense/typesense#api-clients) developed in your favorite language.
 
-Now, I want to know your opinion, if you're using `Typesense` in production [let the community knows](https://github.com/typesense/typesense/issues/140)! If you got until here and liked the article content, let me know reacting to the current post. You can also open a discussion below, I'll try to answer it soon. On the other hand, if you think that I said something wrong, please open an issue in the [article's github repo](https://github.com/luizhlelis/typesense-playground). Thanks!
+Now, I want to know your opinion, if you're using `Typesense` in production [let the community knows](https://github.com/typesense/typesense/issues/140)! If you got here and liked the article content, let me know by reacting to the current post. You can also open a discussion below, I'll try to answer it soon. On the other hand, if you think that I said something wrong, please open an issue in the [article's github repo](https://github.com/luizhlelis/typesense-playground).
