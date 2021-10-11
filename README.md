@@ -4,9 +4,10 @@ This is a playground for the [Typesense](https://typesense.io) search engine. Th
 
 ## Running Commands
 
-First, you need to export the environment variable `TYPESENSE_API_KEY` to use it locally as a `typesense` client:
+First, go to the [src](./src) folder in your terminal, then it's required to export the environment variable `TYPESENSE_API_KEY` to use it locally as a `typesense` client:
 
 ```bash
+cd src
 export TYPESENSE_API_KEY=Hu52dwsas2AdxdE
 ```
 
