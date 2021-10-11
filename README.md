@@ -1,8 +1,14 @@
-# Typesense playground
+# 🔍 Typesense playground
 
 This is a playground for the [Typesense](https://typesense.io) search engine. This example shows a searching engine for the nobel prize winners of all time.
 
-## Running Commands
+## Prerequisites
+
+- [Docker](https://www.docker.com/)
+
+- [Bash](https://www.gnu.org/software/bash/)
+
+## Running commands
 
 First, go to the [src](./src) folder in your terminal, then it's required to export the environment variable `TYPESENSE_API_KEY` to use it locally as a `typesense` client:
 
@@ -34,6 +40,6 @@ curl -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" \
 &sort_by=year:desc"
 ```
 
-## Limitations
+## Typesense limitations
 
-[Nested Fields](https://github.com/typesense/typesense/issues/227).
+[Nested Fields Index](https://github.com/typesense/typesense/issues/227).
