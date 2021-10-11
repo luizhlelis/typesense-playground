@@ -1,4 +1,4 @@
-FROM typesense/typesense:0.22.0.rcs11
+FROM debian
 
-ENV API_KEY=Hu52dwsas2AdxdE
-ENV DATA_DIR=/data
+RUN ["apt-get", "update"]
+RUN ["apt-get", "-yq", "install", "curl"]
