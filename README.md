@@ -28,7 +28,7 @@ curl -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" "http://localhost:8108/colle
 - to search for a nobel prize winner (Einstein in the example below):
 
 ```bash
-curl -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" \                                              
+curl -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" \
 "http://localhost:8108/collections/prizes/documents/search\
 ?q=Einstein&query_by=laureates_full_name\
 &sort_by=year:desc"
