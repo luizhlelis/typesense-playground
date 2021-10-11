@@ -1,2 +1,5 @@
 # Local docker volume folder
 typesense-data
+
+# MacOs files
+.DS_Store
